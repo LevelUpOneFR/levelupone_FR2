@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LevelUpOne</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+    }
+    header, footer {
+      background: #1a1a1a;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      color: orange;
+      margin: 0;
+    }
+    header img {
+      display: block;
+      margin: 0 auto 10px auto;
+      max-height: 100px;
+      filter: drop-shadow(0 0 2px #000);
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      background-color: orange;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .product {
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .product img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .cart {
+      position: fixed;
+      right: 1rem;
+      top: 1rem;
+      background: orange;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #cart-items {
+      padding: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo LevelUpOne">
+    <h1>LevelUpOne</h1>
+  </header>
+
+  <div class="hero">
+    <h2>"Transforme-toi. Un jour à la fois."</h2>
+    <a class="btn" href="#shop">Voir la boutique</a>
+  </div>
+
+  <div id="shop" class="products">
+    <div class="product">
+	  <img src="discipline_tshirt.jpg" alt="T-shirt Discipline" style="max-height: 300px; object-fit: cover;">
+      <h3>T-shirt "Discipline; Motivation"</h3>
+      <p>9.99€</p>
+      <button class="btn" onclick="addToCart('T-shirt Discipline', 25)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="believer_sweat.jpg" alt="Sweat-shirt" style="max-height: 300px; object-fit: cover;">
+      <h3>Sweat-shirt "Believe in Yourself"</h3>
+      <p>19.99€</p>
+      <button class="btn" onclick="addToCart('Hoodie No Excuses', 45)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="hoodie_level_up.jpg" alt="Hoodie Adultes" style="max-height: 300px; object-fit: cover;">
+      <h3>Hoodie Level UP</h3>
+      <p>24.99€</p>
+      <button class="btn" onclick="addToCart('T-shirt Enfant', 20)">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <div class="cart" onclick="showCart()">
+    🛒 Panier (<span id="cart-count">0</span>)
+  </div>
+
+  <div id="cart-items" class="hidden">
+    <h2>Votre panier</h2>
+    <ul id="cart-list"></ul>
+    <p>Total: <span id="cart-total">0</span>€</p>
+    <button class="btn" onclick="checkout()">Commander</button>
+  </div>
+
+  <footer>
+    <p>© 2025 LevelUpOne. Motivation & Style.</p>
+  </footer>
+
+  <script>
+    const cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function showCart() {
+      const list = document.getElementById('cart-list');
+      const total = document.getElementById('cart-total');
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - ${item.price}€`;
+        list.appendChild(li);
+        sum += item.price;
+      });
+      total.textContent = sum;
+      document.getElementById('cart-items').classList.remove('hidden');
+    }
+
+    function checkout() {
+      alert("Merci pour votre commande ! Simulation d'achat terminée. 🧡");
+      cart.length = 0;
+      document.getElementById('cart-count').textContent = 0;
+      document.getElementById('cart-items').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
